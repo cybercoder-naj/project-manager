@@ -13,8 +13,8 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app color="indigo">
-      <p>test</p>
+    <v-navigation-drawer v-model="drawer" app color="primary">
+      <p class="error">test</p>
     </v-navigation-drawer>
   </nav>
 </template>
