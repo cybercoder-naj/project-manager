@@ -14,8 +14,11 @@
         <div>{{ project.due }}</div>
       </v-col>
       <v-col cols="12" sm="4" md="2">
-        <div class="caption grey--text">Status</div>
-        <div>{{ project.status }}</div>
+        <div class="text-right">
+          <v-chip small :class="`${project.status} white--text caption my-2`">
+            {{ project.status }}
+          </v-chip>
+        </div>
       </v-col>
     </v-row>
   </v-card>
@@ -23,28 +26,40 @@
 
 <script>
 export default {
-    name: 'ProjectCard',
-    props: ['project'],
+  name: "ProjectCard",
+  props: ["project"],
 };
 </script>
 
 <style>
 .project.complete {
-    border-left: 4px solid #3cd1c2;
+  border-left: 4px solid #3cd1c2;
 }
 
 .project.ongoing {
-    border-left: 4px solid orange;
+  border-left: 4px solid orange;
 }
 
 .project.overdue {
-    border-left: 4px solid tomato;
+  border-left: 4px solid tomato;
 }
 
 .project::after {
-    content: '';
-    width: 100%;
-    background-color: lightgrey;
-    height: 1px;
+  content: "";
+  width: 100%;
+  background-color: lightgrey;
+  height: 1px;
+}
+
+.v-chip.complete{
+  background: #3cd1c2 !important;
+}
+
+.v-chip.ongoing{
+  background: #ffaa2c !important;
+}
+
+.v-chip.overdue{
+  background: #f83e70 !important;
 }
 </style>
