@@ -35,7 +35,7 @@
 
 <script>
 import ProjectCard from "@/components/ProjectCard.vue";
-import db from '@/firebase.config'
+import firebase from '@/firebase.config'
 
 export default {
   name: "Dashboard",
@@ -46,7 +46,9 @@ export default {
     };
   },
   created() {
-    db.collection('projects').onSnapshot(res => {
+    firebase
+      .firestore()
+      .collection('projects').onSnapshot(res => {
       const changes = res.docChanges()
       changes.forEach(change => {
         if (change.type === 'added') {

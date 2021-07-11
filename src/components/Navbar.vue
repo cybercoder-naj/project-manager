@@ -22,14 +22,14 @@
     </v-snackbar>
 
     <v-app-bar flat app>
-      <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer" />
-      <v-toolbar-title class="text-uppercase grey--text">
+      <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer" v-if="signedIn" />
+      <v-toolbar-title :class="`text-uppercase grey--text ${!signedIn ? 'ml-10' : ''}`">
         <span class="font-weight-light">Project</span>
         <span>Manager</span>
       </v-toolbar-title>
       <v-spacer />
 
-      <v-menu offset-y>
+      <v-menu offset-y v-if="signedIn">
         <template v-slot:activator="{ on }">
           <v-btn text v-on="on" color="grey" class="hidden-xs-only">
             <v-icon left>mdi-chevron-down</v-icon>
@@ -43,7 +43,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn text color="grey">
+      <v-btn text color="grey" v-if="signedIn">
         <span>Sign Out</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
@@ -85,6 +85,7 @@
 
 <script>
 import Popup from './Popup.vue'
+import firebase from '../firebase.config'
 
 export default {
   name: 'Navbar',
@@ -100,5 +101,11 @@ export default {
       snackbar: false
     };
   },
+  computed: {
+    signedIn() {
+      return firebase.auth().currentUser &&
+        firebase.auth().currentUser.uid ? true : false 
+    }
+  }
 };
 </script>
