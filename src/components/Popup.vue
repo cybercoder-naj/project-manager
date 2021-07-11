@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="600px">
+  <v-dialog max-width="600px" v-model="dialog">
     <template v-slot:activator="{ on }">
       <v-btn text v-on="on" class="success">Add New Project</v-btn>
     </template>
@@ -37,8 +37,15 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn text class="success mx-0 my-3" @click="handleSubmit">
-          Add Project
+        <v-btn 
+          text 
+          class="success mx-0 my-3" 
+          @click="handleSubmit"
+          :loading="loading"
+          :disabled="loading"
+        >
+          <span>Add Project</span>
+          <v-icon right>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -57,13 +64,16 @@ export default {
       due: null,
       inputRules: [
         v => (v && v.length >= 3) || "Minimum length is 3 characters"
-      ]
+      ],
+      loading: false,
+      dialog: false
     };
   },
   methods: {
     async handleSubmit() {
       if (!this.$refs.form.validate()) return;
 
+      this.loading = true
       const project = {
         title: this.title,
         content: this.content,
@@ -71,8 +81,10 @@ export default {
         person: "Cybercoder",
         status: "ongoing"
       };
-      
       await db.collection("projects").add(project)
+      
+      this.loading = false
+      this.dialog = false
       console.debug('Added to Db')
     }
   },
