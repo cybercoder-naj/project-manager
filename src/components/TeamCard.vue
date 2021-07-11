@@ -3,7 +3,7 @@
     <v-card class="ma-3" :loading="loading">
       <v-responsive class="pt-4 text-center">
         <v-avatar size="100" class="grey lighten-2">
-            <img :src="person.avatar" :alt="person.name"/>
+          <img :src="person.avatar" :alt="person.name" />
         </v-avatar>
       </v-responsive>
       <v-card-text>
@@ -34,5 +34,5 @@ export default {
       loading: false
     }
   }
-};
+}
 </script>
