@@ -7,26 +7,39 @@ import SignIn from '@/views/SignIn.vue'
 
 Vue.use(VueRouter)
 
+const parentName = "Project Manager"
 const routes = [
   {
     path: '/',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      title: `${parentName} - Dashboard`
+    }
   },
   {
     path: '/projects',
     name: 'Projects',
-    component: Projects
+    component: Projects,
+    meta: {
+      title: `${parentName} - Projects`
+    }
   },
   {
     path: '/team',
     name: 'Team',
-    component: Team
+    component: Team,
+    meta: {
+      title: `${parentName} - Team`
+    }
   },
   {
     path: '/signin',
     name: 'SignIn',
-    component: SignIn
+    component: SignIn,
+    meta: {
+      title: `${parentName} - Sign In`
+    }
   }
 ]
 
@@ -34,6 +47,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    document.title = to.meta && to.meta.title || "Project Manager"
+  })
 })
 
 export default router
