@@ -1,5 +1,26 @@
 <template>
   <nav>
+    <v-snackbar
+      v-model="snackbar"
+      top
+      :timeout="3000"
+      color="success"
+      elevation="24"
+    >
+      You added a Project!
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <v-app-bar flat app>
       <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer" />
       <v-toolbar-title class="text-uppercase grey--text">
@@ -43,7 +64,7 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="9" class="mt-4 mb-3">
-          <Popup />
+          <Popup @submit="snackbar = true"/>
         </v-col>
       </v-row>
       <v-list>
@@ -76,6 +97,7 @@ export default {
         { icon: "folder", text: "My Projects", route: "/projects" },
         { icon: "account", text: "Team", route: "/team" },
       ],
+      snackbar: false
     };
   },
 };

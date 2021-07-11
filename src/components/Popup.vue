@@ -85,6 +85,7 @@ export default {
       
       this.loading = false
       this.dialog = false
+      this.$emit('submit')
       console.debug('Added to Db')
     }
   },
