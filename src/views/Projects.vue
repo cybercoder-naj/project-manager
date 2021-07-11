@@ -4,21 +4,18 @@
 
     <v-container class="my-5">
       <v-expansion-panels inset>
-        <v-expansion-panel v-for="project in projects" :key="project.title"> 
-          <v-expansion-panel-header>{{ project.title }}</v-expansion-panel-header>
-          <v-expansion-panel-content class="px-4 grey--text">
-            <div class="font-weight-bold">Due by {{ project.due }}</div>
-            <div>{{ project.content }}</div>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+        <ProjectAccordion v-for="project in myProjects" :key="project.title" :project="project" />
       </v-expansion-panels>
     </v-container>
   </div>
 </template>
 
 <script>
+import ProjectAccordion from '@/components/ProjectAccordion.vue'
+
 export default {
   name: "Projects",
+  components: { ProjectAccordion },
   data() {
     return {
       projects: [

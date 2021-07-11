@@ -41,6 +41,11 @@
           <p class="white--text text-subheading mt-1">The Net Ninja</p>
         </v-col>
       </v-row>
+      <v-row justify="center">
+        <v-col cols="9" class="mt-4 mb-3">
+          <Popup />
+        </v-col>
+      </v-row>
       <v-list>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-action>
@@ -58,8 +63,11 @@
 </template>
 
 <script>
+import Popup from './Popup.vue'
+
 export default {
   name: 'Navbar',
+  components: { Popup },
   data() {
     return {
       drawer: false,
