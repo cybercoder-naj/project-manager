@@ -8,16 +8,18 @@
         <h2>Add a New Project</h2>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3">
+        <v-form class="px-3" ref="form">
           <v-text-field
             label="Title"
             v-model="title"
             prepend-icon="mdi-folder"
+            :rules="inputRules"
           />
           <v-textarea
             label="Information"
             v-model="content"
             prepend-icon="mdi-pencil"
+            :rules="inputRules"
           />
           <v-menu
             :close-on-content-click="true"
@@ -25,7 +27,14 @@
             min-width="auto"
           >
             <template v-slot:activator="{ on }">
-              <v-text-field v-on="on" label="Due Date" prepend-icon="mdi-calendar" readonly :value="formattedDate"/>
+              <v-text-field 
+                v-on="on" 
+                label="Due Date" 
+                prepend-icon="mdi-calendar" 
+                readonly 
+                :value="formattedDate"
+                :rules="inputRules"
+              />
             </template>
             <v-date-picker v-model="due">
             </v-date-picker>
@@ -49,12 +58,16 @@ export default {
     return {
       title: '',
       content: '',
-      due: null
+      due: null,
+      inputRules: [
+        v => v && v.length >= 3 || 'Minimum length is 3 characters'
+      ]
     }
   },
   methods: {
     handleSubmit() {
-      console.table({title: this.title, content: this.content})
+      if(this.$refs.form.validate())
+        console.table({title: this.title, content: this.content})
     }
   },
   computed: {
