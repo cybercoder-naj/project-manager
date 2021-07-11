@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (!this.$refs.form.validate()) return;
 
       const project = {
@@ -71,8 +71,9 @@ export default {
         person: "Cybercoder",
         status: "ongoing"
       };
-      db.collection("projects").add(project)
-        .then(() => console.debug('Added to Db'))
+      
+      await db.collection("projects").add(project)
+      console.debug('Added to Db')
     }
   },
   computed: {
