@@ -85,7 +85,6 @@
 
 <script>
 import Popup from './Popup.vue'
-import firebase from '../firebase.config'
 
 export default {
   name: 'Navbar',
@@ -100,12 +99,6 @@ export default {
       ],
       snackbar: false
     };
-  },
-  computed: {
-    signedIn() {
-      return firebase.auth().currentUser &&
-        firebase.auth().currentUser.uid ? true : false 
-    }
   }
 };
 </script>
