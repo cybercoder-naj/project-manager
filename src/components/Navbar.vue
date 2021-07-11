@@ -13,7 +13,19 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app color="primary" temporary>
+    <v-navigation-drawer v-model="drawer" app color="primary">
+      <v-row justify="center">
+        <v-col class="mt-5" cols="6">
+          <v-avatar size="100">
+            <img src="https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-1.png" alt="" />
+          </v-avatar>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="6">
+          <p class="white--text text-subheading mt-1">The Net Ninja</p>
+        </v-col>
+      </v-row>
       <v-list>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-action>

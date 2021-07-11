@@ -19,11 +19,36 @@ export default {
   data() {
     return {
       team: [
-        { name: "The Net Ninja", role: "Web developer" },
-        { name: "Ryu", role: "Graphic designer" },
-        { name: "Chun Li", role: "Web developer" },
-        { name: "Gouken", role: "Social media maverick" },
-        { name: "Yoshi", role: "Sales guru" },
+        {
+          name: "The Net Ninja",
+          role: "Web developer",
+          avatar:
+            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-1.png",
+        },
+        {
+          name: "Ryu",
+          role: "Graphic designer",
+          avatar:
+            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-2.png",
+        },
+        {
+          name: "Chun Li",
+          role: "Web developer",
+          avatar:
+            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-3.png",
+        },
+        {
+          name: "Gouken",
+          role: "Social media maverick",
+          avatar:
+            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-4.png",
+        },
+        {
+          name: "Yoshi",
+          role: "Sales guru",
+          avatar:
+            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-5.png",
+        },
       ],
     };
   },
