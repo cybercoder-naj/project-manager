@@ -19,6 +19,17 @@
             v-model="content"
             prepend-icon="mdi-pencil"
           />
+          <v-menu
+            :close-on-content-click="true"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field v-on="on" label="Due Date" prepend-icon="mdi-calendar" readonly :value="formattedDate"/>
+            </template>
+            <v-date-picker v-model="due">
+            </v-date-picker>
+          </v-menu>
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -31,17 +42,25 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   data() {
     return {
       title: '',
-      content: ''
+      content: '',
+      due: null
     }
   },
   methods: {
     handleSubmit() {
       console.table({title: this.title, content: this.content})
     }
+  },
+  computed: {
+      formattedDate() {
+          return this.due ? moment(this.due).format('Do MMM YYYY') : '' 
+      }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" sm="6" md="4" lg="3">
-    <v-card class="ma-3" :loading="loading">
+    <v-card class="ma-3">
       <v-responsive class="pt-4 text-center">
         <v-avatar size="100" class="grey lighten-2">
           <img :src="person.avatar" :alt="person.name" />
@@ -23,16 +23,6 @@
 <script>
 export default {
   name: "TeamCard",
-  props: ["person"],
-  methods: {
-    getImgUrl(pic) {
-      return require(`@/assets/avatars/${pic}`)
-    },
-  },
-  data() {
-    return {
-      loading: false
-    }
-  }
+  props: ["person"]
 }
 </script>
