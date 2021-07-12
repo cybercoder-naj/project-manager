@@ -53,13 +53,13 @@
       <v-row justify="center">
         <v-col class="mt-5" cols="6">
           <v-avatar size="100">
-            <img src="https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-1.png" alt="" />
+            <img :src="user.image ? user.image : require('@/assets/profile.svg')" />
           </v-avatar>
         </v-col>
       </v-row>
       <v-row justify="center">
         <v-col cols="6">
-          <p class="white--text text-subheading mt-1">The Net Ninja</p>
+          <p class="white--text text-center text-body-1 mt-1">{{ user.name.split(" ")[0] }}</p>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -100,7 +100,8 @@ export default {
       ],
       snackbar: false,
       message: '',
-      snackType: ''
+      snackType: '',
+      user: null
     };
   },
   methods: {
@@ -117,6 +118,13 @@ export default {
     signOut() {
       firebase.auth().signOut()
     }
+  },
+  created() {
+    const { uid } = firebase.auth().currentUser
+    firebase.firestore().collection('users').doc(uid)
+      .onSnapshot(doc => {
+        this.user = doc.data()
+      })
   }
 };
 </script>

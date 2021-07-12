@@ -32,7 +32,7 @@
                 :rules="inputRules"
               />
             </template>
-            <v-date-picker v-model="due"> </v-date-picker>
+            <v-date-picker v-model="due" />
           </v-menu>
         </v-form>
       </v-card-text>
@@ -66,8 +66,16 @@ export default {
         v => (v && v.length >= 3) || "Minimum length is 3 characters"
       ],
       loading: false,
-      dialog: false
+      dialog: false,
+      user: null
     };
+  },
+  created() {
+    const { uid } = firebase.auth().currentUser
+    firebase.firestore().collection('users').doc(uid)
+      .onSnapshot(doc => {
+        this.user = doc.data()
+      })
   },
   methods: {
     async handleSubmit() {
@@ -76,13 +84,20 @@ export default {
       this.loading = true
       
       try {
+        const today = new Date().getTime()
+        const [year, month, date] = this.due.split('-')
+        let status = 'ongoing'
+        const chosen = new Date(year, month - 1, date, 23, 59, 59).getTime()
+        if (today > chosen)
+          status = 'overdue'
+          
         const project = {
           title: this.title,
           content: this.content,
-          due: this.formattedDate,
-          person: "Cybercoder",
-          status: "ongoing"
-        };
+          due: chosen,
+          person: this.user.name,
+          status
+        }
         await firebase
           .firestore()
           .collection("projects").add(project)

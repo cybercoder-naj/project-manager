@@ -11,7 +11,7 @@
       </v-col>
       <v-col cols="6" sm="4" md="2">
         <div class="caption grey--text">Due by</div>
-        <div>{{ project.due }}</div>
+        <div>{{ getDueDate }}</div>
       </v-col>
       <v-col cols="12" sm="4" md="2">
         <div class="text-right">
@@ -25,9 +25,17 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: "ProjectCard",
   props: ["project"],
+  computed: {
+    getDueDate() {
+      const date = new Date(this.project.due)
+      return moment(date).format('Do MMM yyyy')
+    }
+  }
 };
 </script>
 
