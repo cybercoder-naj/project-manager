@@ -45,11 +45,7 @@ export default {
       projects: []
     };
   },
-  created() {
-    const auth = firebase.auth()
-    if (!(auth.currentUser && auth.currentUser.uid))
-      this.$router.push('/signin')
-
+  mounted() {
     firebase
       .firestore()
       .collection('projects').onSnapshot(res => {
@@ -62,6 +58,12 @@ export default {
           })
         }
       })
+    })
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user)
+        this.$router.push('/signin')
     })
   },
   methods: {

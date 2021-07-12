@@ -43,7 +43,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn text color="grey">
+      <v-btn text color="grey" @click="signOut">
         <span>Sign Out</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
@@ -85,6 +85,7 @@
 
 <script>
 import Popup from './Popup.vue'
+import firebase from '@/firebase.config'
 
 export default {
   name: 'Navbar',
@@ -112,6 +113,9 @@ export default {
       this.message = 'You added a Project!'
       this.snackType = 'success'
       this.snackbar = true
+    },
+    signOut() {
+      firebase.auth().signOut()
     }
   }
 };

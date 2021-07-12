@@ -15,13 +15,14 @@ export default {
   name: "App",
   components: { Navbar },
   data() {
-    return {};
+    return {
+      signedIn: false
+    };
   },
-  computed: {
-    signedIn() {
-      return firebase.auth().currentUser &&
-        firebase.auth().currentUser.uid ? true : false 
-    }
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.signedIn = user ? true : false
+    })
   }
 };
 </script>

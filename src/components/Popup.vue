@@ -83,7 +83,9 @@ export default {
           person: "Cybercoder",
           status: "ongoing"
         };
-        await firebase.collection("projects").add(project)
+        await firebase
+          .firestore()
+          .collection("projects").add(project)
         
         this.$emit('submit')
       } catch (error) {

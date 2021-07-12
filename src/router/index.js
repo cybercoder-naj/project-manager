@@ -4,6 +4,7 @@ import Dashboard from '@/views/Dashboard.vue'
 import Projects from '@/views/Projects.vue'
 import Team from '@/views/Team.vue'
 import SignIn from '@/views/SignIn.vue'
+import Register from '@/views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,14 @@ const routes = [
     component: SignIn,
     meta: {
       title: `${parentName} - Sign In`
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      title: `${parentName} - Register`
     }
   }
 ]
