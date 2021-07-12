@@ -19,38 +19,7 @@ export default {
   components: { TeamCard },
   data() {
     return {
-      team: [
-        {
-          name: "The Net Ninja",
-          role: "Web developer",
-          avatar:
-            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-1.png",
-        },
-        {
-          name: "Ryu",
-          role: "Graphic designer",
-          avatar:
-            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-2.png",
-        },
-        {
-          name: "Chun Li",
-          role: "Web developer",
-          avatar:
-            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-3.png",
-        },
-        {
-          name: "Gouken",
-          role: "Social media maverick",
-          avatar:
-            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-4.png",
-        },
-        {
-          name: "Yoshi",
-          role: "Sales guru",
-          avatar:
-            "https://raw.githubusercontent.com/iamshaunjp/vuetify-playlist/lesson-20/todo-ninja/public/avatar-5.png",
-        },
-      ],
+      team: [],
     };
   },
   created() {
@@ -58,6 +27,11 @@ export default {
       if (!user)
         this.$router.push('/signin')
     })
+
+    firebase.firestore().collection('users').get()
+      .then(snapshot => {
+        this.team = snapshot.docs.map(doc => doc.data())
+      })
   }
 };
 </script>
