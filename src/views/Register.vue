@@ -107,9 +107,9 @@
                       "
                     >
                       Already have an account?
-                      <a class="v-link black--text" href="/register">
+                      <router-link class="v-link black--text" to="/signin">
                         Click here to sign in.
-                      </a>
+                      </router-link>
                     </p>
                   </v-col>
                 </v-row>

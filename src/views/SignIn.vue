@@ -77,9 +77,9 @@
                       "
                     >
                       Do not have an account?
-                      <a class="v-link black--text" href="/register"
-                        >Click here to register.</a
-                      >
+                      <router-link class="v-link black--text" to="/register">
+                        Click here to register.
+                      </router-link>
                     </p>
                   </v-col>
                   <v-spacer />
