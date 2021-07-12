@@ -28,6 +28,10 @@ export default {
     }
   },
   created() {
+    const auth = firebase.auth()
+    if (!(auth.currentUser && auth.currentUser.uid))
+      this.$router.push('/signin')
+
     firebase
       .firestore()
       .collection('projects').onSnapshot(res => {

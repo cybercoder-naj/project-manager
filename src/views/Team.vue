@@ -12,6 +12,7 @@
 
 <script>
 import TeamCard from "@/components/TeamCard.vue";
+import firebase from '@/firebase.config'
 
 export default {
   name: "Team",
@@ -52,5 +53,11 @@ export default {
       ],
     };
   },
+  created() {
+    const auth = firebase.auth()
+    if (!(auth.currentUser && auth.currentUser.uid))
+      this.$router.push('/signin')
+
+  }
 };
 </script>

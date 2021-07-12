@@ -45,9 +45,14 @@
                   </v-col>
                 </v-row>
                 <v-row>
+                  <v-col class="pt-0 py-sm-0 py-0" cols="6">
+                    <p class="text-caption text-start black--text font-weight-medium">Do not have an account? 
+                      <a class="v-link black--text" href="/register">Click here to register.</a>
+                    </p>
+                  </v-col>
                   <v-spacer />
-                  <v-col class="pt-0 py-sm-0 py-0" cols="12">
-                    <p class="text-caption text-end black--text font-weight-medium">Forgot Password?</p>
+                  <v-col class="pt-0 py-sm-0 py-0" cols="6">
+                    <p class="text-caption text-end black--text font-weight-medium v-link">Forgot Password?</p>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -116,6 +121,12 @@ export default {
           this.logging = false
         }
     }
+  },
+  created() {    
+    const auth = firebase.auth()
+    if (auth.currentUser && auth.currentUser.uid)
+      this.$router.push('/')
+
   }
 };
 </script>
@@ -128,5 +139,14 @@ export default {
 
 #bgcolor {
   height: 100%;
+}
+
+.v-link {
+  /* color: inherit !important;*/
+  cursor: pointer;
+}
+
+.v-link:hover {
+  text-decoration: underline;
 }
 </style>

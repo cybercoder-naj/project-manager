@@ -54,7 +54,7 @@
 
 <script>
 import moment from "moment";
-import db from "@/firebase.config";
+import firebase from "@/firebase.config";
 
 export default {
   data() {
@@ -74,19 +74,24 @@ export default {
       if (!this.$refs.form.validate()) return;
 
       this.loading = true
-      const project = {
-        title: this.title,
-        content: this.content,
-        due: this.formattedDate,
-        person: "Cybercoder",
-        status: "ongoing"
-      };
-      await db.collection("projects").add(project)
       
-      this.loading = false
-      this.dialog = false
-      this.$emit('submit')
-      console.debug('Added to Db')
+      try {
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: this.formattedDate,
+          person: "Cybercoder",
+          status: "ongoing"
+        };
+        await firebase.collection("projects").add(project)
+        
+        this.$emit('submit')
+      } catch (error) {
+        this.$emit('error', error.message)
+      } finally {
+        this.loading = false
+        this.dialog = false
+      }
     }
   },
   computed: {

@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <!-- TODO v-if="signedIn" -->
-    <Navbar />
+    <Navbar v-if="signedIn" />
     <v-main class="grey lighten-4">
       <router-view />
     </v-main>

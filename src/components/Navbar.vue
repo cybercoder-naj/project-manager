@@ -4,10 +4,10 @@
       v-model="snackbar"
       top
       :timeout="3000"
-      color="success"
+      :color="snackType"
       elevation="24"
     >
-      You added a Project!
+      {{ message }}
 
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -64,7 +64,7 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="9" class="mt-4 mb-3">
-          <Popup @submit="snackbar = true"/>
+          <Popup @submit="handleSubmit" @error="handleError"/>
         </v-col>
       </v-row>
       <v-list>
@@ -97,8 +97,22 @@ export default {
         { icon: "folder", text: "My Projects", route: "/projects" },
         { icon: "account", text: "Team", route: "/team" },
       ],
-      snackbar: false
+      snackbar: false,
+      message: '',
+      snackType: ''
     };
+  },
+  methods: {
+    handleError(event) {
+      this.message = event.value || 'Unexpected Error Occured.'
+      this.snackType = 'error'
+      this.snackbar = true
+    },
+    handleSubmit() {
+      this.message = 'You added a Project!'
+      this.snackType = 'success'
+      this.snackbar = true
+    }
   }
 };
 </script>
