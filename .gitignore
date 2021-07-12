@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 *.sh
 src/firebase.config.js
+# Cordova
+/src-cordova/platforms
+/src-cordova/plugins
+/public/cordova.js
